@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="HomePagestyle.css">
+    <title>Resume Builder</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <a href="#" class="nav_logo">Resume Builder</a>
+            <ul class="nav_items">
+                <li class="nav_item">
+                    <a href="#" class="nav_link">Home</a>
+                    <a href="BuildResume.html" class="nav_link">Build Resume</a>
+                    <a href="ChooseTemplate.html" class="nav_link">Templates</a>
+                    <a href="about.html" class="nav_link">About</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="header-banner">
+            <div class="container h-100 d-flex align-items-center justify-content-center">
+                <div class = "row text-center justify-content-center">
+                    <h1 class = "text-uppercase text-blue fw-6 lh-17 display-5">create your professional cv in just 5 <span class = "text-lowercase text-primary">minutes!</span></h1>
+                    <p class = "text-grey fs-4 mt-3 mb-5">Easy to use. Time-saver. Professional.</p>
+                    <button class = "btn btn-lg text-capitalize btn-primary btn-banner fs-4" onclick="navigateToBuildResume()">let's get started</button>
+                </div>
+            </div>
+        </div>
+    </header>
+        
+    </header>
+    <script>
+        function navigateToBuildResume() {
+            window.location.href = 'buildResume.html';
+        }
+
+    </script>
+</body>
+</html>

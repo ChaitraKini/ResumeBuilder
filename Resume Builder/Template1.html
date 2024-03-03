@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Template1Style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Template 1</title>
+    <!-- Include jspdf library via CDN link -->
+    <!-- jsPDF library -->
+    <script src="js/jsPDF/dist/jspdf.umd.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="left_side">
+            <div class="profileText">
+                <div class="imgBx">
+                    <img src="john_doe.jpg">
+                </div>
+                <h2 id="fullName"> <!-- Placeholder for full name --> <br><span id="designation"> <!-- Placeholder for designation --> </span></h2>
+            </div>
+
+            <div class="contactInfo">
+                <h3 class="title">Contact Info</h3>
+                <ul>
+                    <li>
+                        <span class="icon"><i class="fa fa-phone" aria-hidden="true"></i></span>
+                        <span class="text" id="phone"> <!-- Placeholder for phone --> </span>
+                    </li>
+                    <li>
+                        <span class="icon"><i class="fa fa-envelope-o" aria-hidden="true"></i></span>
+                        <span class="text" id="email"> <!-- Placeholder for email --> </span>
+                    </li>
+                    <li>
+                        <span class="icon"><i class="fa fa-globe" aria-hidden="true"></i></span>
+                        <span class="text" id="website"> <!-- Placeholder for website --> </span>
+                    </li>
+                    <li>
+                        <span class="icon"><i class="fa fa-linkedin-square" aria-hidden="true"></i></span>
+                        <span class="text" id="linkedin"> <!-- Placeholder for LinkedIn --> </span>
+                    </li>
+                    <li>
+                        <span class="icon"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                        <span class="text" id="address"> <!-- Placeholder for address --> </span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="contactInfo education">
+                <h3 class="title">Education</h3>
+                <ul>
+                    <!-- Placeholder for education -->
+                    <li id="educationItem1">
+                        <!-- Individual education item -->
+                    </li>
+                </ul>
+            </div>
+
+            
+            <div class="contactInfo language">
+                <h3 class="title">Languages</h3>
+                <ul id="languageList" class="percent">
+                    <!-- Placeholder for languages -->
+                </ul>
+            </div>
+            
+            
+        </div>
+        <div class="right_side">
+            <div class="about">
+                <h2 class="title2">Profile</h2>
+                <p id="profileText"> <!-- Placeholder for profile text --> </p>
+            </div>
+            <div class="about">
+                <h2 class="title2">Experience</h2>
+                <div class="box" id="experienceItem">
+                    <!-- Placeholder for experience -->
+                </div>
+            </div>
+            <div class="about skills">
+                <h2 class="title2">Professional Skills</h2>
+                <!-- Placeholder for skills -->
+                <div id="skill1">
+                    <!-- Individual skill -->
+                    <div class="box">
+                    </div>
+                </div>
+            </div>
+            <div class="about interest">
+                <h2 class="title2">Interest</h2>
+                <ul id="interestList">
+                    <!-- Placeholder for interests -->
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add a "Download" button -->
+    <span class="float-end pt-2">
+        <button onclick="downloadResume();">Download Resume</button>
+    </span>
+
+    <script>
+
+        var data = window.location.search;
+        var params = new URLSearchParams(data);
+        
+        //Personal info
+        var FirsttName = params.get('firstName');
+        var LasttName = params.get('lastName');
+        var FulllName = FirsttName + ' ' + LasttName;
+        var Phonne = params.get('phone');
+        var Emaill = params.get('email');
+        var Websitee = params.get('website');
+        var Linkedinn = params.get('links');
+        var Addresss = params.get('address');
+        var AboutYourself = params.get('aboutYourself');
+
+        document.getElementById('fullName').innerHTML = FulllName;
+        document.getElementById('phone').innerHTML = Phonne;
+        document.getElementById('email').innerHTML = Emaill;
+        document.getElementById('website').innerHTML = Websitee;
+        document.getElementById('linkedin').innerHTML = Linkedinn;
+        document.getElementById('address').innerHTML = Addresss;
+        document.getElementById('profileText').textContent = AboutYourself;
+
+        // Education info
+        var educationList = document.getElementById('educationList');
+        var educationCounter = 0;
+
+        // Loop to retrieve education data dynamically
+        while (true) {
+            var DegreeName = params.get('degreeName' + educationCounter);
+            var CollegeName = params.get('collegeName' + educationCounter);
+            var University = params.get('university' + educationCounter);
+            var FromYearEdu = params.get('fromYearEdu' + educationCounter);
+            var ToYearEdu = params.get('toYearEdu' + educationCounter);
+
+            // Break the loop if any education data is missing
+            if (!DegreeName || !CollegeName || !University || !FromYearEdu || !ToYearEdu) {
+                break;
+            }
+
+            // Create list item with education data
+            var listItem = document.createElement('li');
+            listItem.classList.add('educationItem'); // Add a class to the <li> for styling
+
+            // Create and append <h5> element for years
+            var yearsHeading = document.createElement('h5');
+            yearsHeading.textContent = FromYearEdu + ' - ' + ToYearEdu;
+            listItem.appendChild(yearsHeading);
+
+            // Create and append <h4> element for degree name
+            var degreeHeading = document.createElement('h4');
+            degreeHeading.textContent = DegreeName;
+            listItem.appendChild(degreeHeading);
+
+            // Create and append <h4> element for college name
+            var collegeHeading = document.createElement('h4');
+            collegeHeading.textContent = CollegeName;
+            listItem.appendChild(collegeHeading);
+
+            // Create and append <h3> element for university
+            var universityHeading = document.createElement('h3');
+            universityHeading.textContent = University;
+            listItem.appendChild(universityHeading);
+
+            // Append the new education item to the education list
+            var educationList = document.querySelector('.contactInfo.education ul');
+            educationList.appendChild(listItem);
+
+            educationCounter++;
+
+        }
+
+        
+        //experience info
+        var experienceList = document.getElementById('experienceItem');
+        var experienceCounter = 0;
+
+        // Loop to retrieve experience data dynamically
+        while (true) {
+            var companyName = params.get('companyName' + experienceCounter);
+            var roleName = params.get('roleName' + experienceCounter);
+            var responsibilities = params.get('responsibilities' + experienceCounter);
+            var fromYearExp = params.get('fromYearExp' + experienceCounter);
+            var toYearExp = params.get('toYearExp' + experienceCounter);
+
+            // Break the loop if any experience data is missing
+            if (!companyName || !roleName || !responsibilities || !fromYearExp || !toYearExp ) {
+                break;
+            }
+
+            // Create div for each experience item
+            var experienceDiv = document.createElement('div');
+            experienceDiv.classList.add('box');
+
+            // Create and append year and company info
+            var yearCompanyDiv = document.createElement('div');
+            yearCompanyDiv.classList.add('year_company');
+
+            var yearHeading = document.createElement('h5');
+            yearHeading.textContent = fromYearExp + ' - ' + toYearExp;
+            yearCompanyDiv.appendChild(yearHeading);
+
+            var companyHeading = document.createElement('h5');
+            companyHeading.textContent = companyName;
+            yearCompanyDiv.appendChild(companyHeading);
+
+            experienceDiv.appendChild(yearCompanyDiv);
+
+            // Create and append position and responsibilities info
+            var textDiv = document.createElement('div');
+            textDiv.classList.add('text');
+
+            var positionHeading = document.createElement('h4');
+            positionHeading.textContent = roleName; // Set the position content here
+            textDiv.appendChild(positionHeading);
+
+            var responsibilitiesParagraph = document.createElement('p');
+            responsibilitiesParagraph.textContent = responsibilities;
+            textDiv.appendChild(responsibilitiesParagraph);
+
+            experienceDiv.appendChild(textDiv);
+
+            // Append the new experience item to the experience list
+            experienceList.appendChild(experienceDiv);
+
+            experienceCounter++;
+        }
+
+        // Retrieve language data
+        var languageList = document.querySelector('#languageList');
+        var languageCounter = 0;
+
+        // Loop to retrieve language data dynamically
+        while (true) {
+            var langName = params.get('langName' + languageCounter);
+            var langPercent = params.get('langPercent' + languageCounter);
+
+            // Break the loop if any language data is missing
+            if (!langName || !langPercent) {
+                break;
+            }
+            
+            // Create list item with language data
+            var listItem = document.createElement('li');
+            // Add language name
+            var languageNameSpan = document.createElement('span');
+            languageNameSpan.classList.add('text');
+            languageNameSpan.textContent = langName;
+            listItem.appendChild(languageNameSpan);
+
+            // Add percentage bar
+            var languagePercentSpan = document.createElement('span');
+            languagePercentSpan.classList.add('percent');
+            var progressBarDiv = document.createElement('div');
+            progressBarDiv.style.width = langPercent + '%';
+            languagePercentSpan.appendChild(progressBarDiv);
+
+            listItem.appendChild(languagePercentSpan);
+            languageList.appendChild(listItem);
+            
+            languageCounter++;
+
+        }
+
+        // Retrieve skills data
+        var skillContainer = document.querySelector('.about.skills'); // Select the container for skills
+
+        var skillCounter = 0;
+        while (true) {
+            var skillName = params.get('skillName' + skillCounter);
+            var skillPercent = params.get('skillPercent' + skillCounter);
+
+            // Break the loop if any skill data is missing
+            if (!skillName || !skillPercent) {
+                break;
+            }
+
+            // Create elements for skill and percentage
+            var skillDiv = document.createElement('div');
+            skillDiv.classList.add('box');
+
+            var skillNameHeading = document.createElement('h4');
+            skillNameHeading.textContent = skillName;
+            skillDiv.appendChild(skillNameHeading);
+
+            var progressBarDiv = document.createElement('div');
+            progressBarDiv.classList.add('percent');
+            progressBarDiv.style.width = skillPercent + '%';
+            
+            var percentFillDiv = document.createElement('div');
+            percentFillDiv.style.width = skillPercent + '%';
+            progressBarDiv.appendChild(percentFillDiv);
+
+            skillDiv.appendChild(progressBarDiv);
+
+            // Append the skill div to the container
+            skillContainer.appendChild(skillDiv);
+
+            skillCounter++;
+        }
+
+        // Retrieve interest data
+        var interestList = document.getElementById('interestList');
+        var interestCounter = 0;
+
+        // Loop to retrieve interest data dynamically
+        while (true) {
+            var interestName = params.get('interestName' + interestCounter);
+
+            console.log(interestName);
+            // Break the loop if any interest data is missing
+            if (!interestName) {
+                break;
+            }
+
+            // Create list item with interest name
+            var listItem = document.createElement('li');
+            listItem.textContent = interestName;
+            interestList.appendChild(listItem);
+
+            interestCounter++;
+        }
+
+        //Download Resume
+        window.jsPDF = window.jspdf.jsPDF;
+
+        function downloadResume() {
+            var doc = new jsPDF();
+            
+            // Source HTMLElement or a string containing HTML.
+            var elementHTML = document.querySelector(".container");
+
+            doc.html(elementHTML, {
+                callback: function(doc) {
+                    // Select the image
+                    var img = new Image();
+                    img.onload = function() {
+                        // Add the image to the PDF after it's loaded
+                        doc.addImage(this, 10, 10, 50, 50); // Adjust the position and size as needed
+                        // Save the PDF
+                        doc.save('resume.pdf');
+                    };
+                    img.src = 'Img.jpg'; // Specify the image source
+                },
+                margin: [10, 10, 10, 10],
+                autoPaging: 'text',
+                x: 0,
+                y: 0,
+                width: 190, //target width in the PDF document
+                windowWidth: 675 //window width in CSS pixels
+            });
+        }
+
+
+
+    </script>
+</body>
+</html>

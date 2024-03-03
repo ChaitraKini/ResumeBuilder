@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Template</title>
+    <style>
+        /* Center the container */
+        body {
+            font-family: 'Arial', sans-serif;
+            /*background-color: #492d4e;*/
+            background-color: bisque;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            position: relative;
+            font-size: 40px;
+            font-weight: 600;
+            font-family: 'Roboto', sans-serif;
+            color: #fdfdfe;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 5px #b393d3, 0px 0px 10px #b393d3, 0px 0px 10px #b393d3, 0px 0px 20px #b393d3;
+            font-family: 'Courier New', Courier, monospace;
+            margin-bottom: 40px;
+            top: 90px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+
+        /* Make the image responsive */
+        img {
+            max-width: 100%;
+            height: 20%;
+        }
+    </style>
+</head>
+<body>
+    <h2>
+        <center>Choose a template</center>
+    </h2>
+    <div class="container">
+        <a href="buildResume.html">
+            <img src="Template1.png" alt="Template 1" onclick="selectTemplate('Template1')">
+        </a>
+    </div>
+</body>
+</html>
